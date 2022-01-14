@@ -1,0 +1,236 @@
+﻿#divName {
+    max-width: 100%;
+    max-height: 30em;
+    overflow: scroll;
+    position: relative;
+}
+
+    #divName table {
+        position: relative;
+        border-collapse: collapse;
+    }
+        /*thead, tbody {
+            display: block;
+        }
+
+        tbody {
+            height: 100px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }*/
+        #divName table td, #divName th {
+            padding: 0.25em;
+        }
+
+        #divName table thead th {
+            position: -webkit-sticky; /* for Safari */
+            position: sticky;
+            top: 0;
+            background: forestgreen;
+            color: #FFF;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+            #divName table thead th:first-child {
+                left: 0;
+                z-index: 1;
+            }
+
+        #divName table td:first-child {
+            position: sticky;
+            width: 100px;
+            left: 0;
+            z-index: 10;
+            background: #fff;
+        }
+
+        #divName table tbody th {
+            position: -webkit-sticky; /* for Safari */
+            position: sticky;
+            left: 0;
+            background: #FFF;
+            border-right: 1px solid #CCC;
+        }
+
+        #divName table thead th:first-child {
+            left: 0;
+            z-index: 1;
+        }
+
+#loading-div-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+#loading-div {
+    width: 300px;
+    height: 150px;
+    background-color: #fff;
+    /*border: 5px solid #1468b3;*/
+    text-align: center;
+    color: #202020;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -100px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    behavior: url("/css/pie/PIE.htc"); /* HANDLES IE */
+}
+
+#divName table td a {
+    font-weight: 600;
+}
+
+#divName table .tdspan {
+    display: block;
+    background-color: #8015d6;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 0px;
+    margin-top: 8px;
+    color: #fff;
+    font-weight: 600;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+    #divName table .tdspan a {
+        color: #fff;
+    }
+
+#divName table .tdoddspan {
+    display: block;
+    background: linear-gradient(to bottom, #ff5959 0%,#ff3b3b 100%);
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 0px;
+    margin-top: 8px;
+    color: #fff;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+    #divName table .tdoddspan a {
+        color: #fff;
+    }
+
+#divName table .tdheadspan {
+    display: block;
+    background-color: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+    #divName table .tdheadspan a {
+        color: #000;
+    }
+
+#divName table .tdemptyspan {
+    display: block;
+    background-color: #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    height: 25px;
+}
+
+
+#divName table {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+    #divName table > tbody > tr > td, table > tbody > tr > th,
+    table > tfoot > tr > td, table > tfoot > tr > th,
+    table > thead > tr > td, table > thead > tr > th {
+        padding: 5px 15px 5px 11px;
+        text-align: center;
+    }
+
+    #divName table > tbody > tr > td, table > tbody > tr > th,
+    table > tfoot > tr > td, table > tfoot > tr > th {
+        padding: 0px 0px 0px 0px;
+        text-align: center;
+    }
+
+    #divName table .nowrap {
+        white-space: nowrap;
+    }
+
+.tbltooltip strong {
+    font-size: 8pt;
+}
+
+table {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.k-grid-header th.k-header > .k-link {
+    font-weight: 600;
+    text-align: center;
+}
+
+#divName table .currentPR {
+    border-top: 2px solid red;
+    border-bottom: 2px solid red;
+    color: red;
+    animation: opacity 2s ease-in-out infinite;
+    opacity: 1;
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/********************************/
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    opacity: 1;
+}
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+.form-control.k-widget {
+    padding: 0;
+    width: 100%;
+}

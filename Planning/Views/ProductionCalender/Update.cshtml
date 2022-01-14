@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "Production Calendar Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/ProductionCalender.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="font-family: 'Pacifico', cursive">Production Calender Update</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="radio-inline">
+                    <label><input type="radio" name="rbHoliDday" value="WH" checked>Holi Day/Work Day</label>
+                </div>
+                <div class="radio-inline">
+                    <label><input type="radio" name="rbHoliDday" value="ST">Standard Time</label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 10px;">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <label>Company</label>
+                    <select id="ddlCompany" class="form-control"></select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <label>Line Number</label>
+                    <select id="ddlLineNumber" class="selectpicker" data-live-search="true" multiple="multiple" data-actions-box="true" data-container="body"></select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <label>From Date</label>
+                    <input type="text" id="txtFromDate" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <label>To Date</label>
+                    <input type="text" id="txtToDate" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="radio">
+                    <label><input type="radio" name="rbCalendar" value="H" checked>Off Day</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="rbCalendar" value="W">Working Hour</label>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-1 col-lg-1">
+                <div class="form-group">
+                    <label>Hour</label>
+                    <input type="text" id="txtWorkingHour" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-1 col-lg-1">
+                <div class="form-group" style="padding-top: 5px;">
+                    <label></label>
+                    <button id="btnLoad" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <label>Year Name</label>
+                    <input type="text" id="txtYear" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2" style="padding-top: 25px;">
+                <button id="btnLoadYearData" class="btn btn-primary">Load Calendar</button>
+            </div>
+        </div>
+        <div class="row" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 10px;">
+            <div id="tblProductionCalender">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .panel.panel-headline .panel-heading {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .panel .panel-heading {
+        padding-top: 5px;
+        padding-bottom: 1px;
+        position: relative;
+    }
+
+    .form-control.k-widget {
+        padding: 0;
+        width: 100%;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 5px;
+    }
+
+    .yearpicker-items {
+        font-size: 10pt;
+    }
+
+    .yearpicker-current {
+        font-size: 10pt;
+    }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .k-grid-header th.k-header > .k-link {
+        text-align: center;
+        font-weight: 600;
+        font-size: 10pt;
+    }
+    .k-grid td {
+        padding: .2em .0em !important;
+        text-align: center;
+    }
+    .k-grid th {
+        text-align: center !important;
+    }
+</style>

@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Production Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/ProductionUpdate.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="font-family: 'Pacifico', cursive">Production Update</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 10px;">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="ddlPRID">PRID</label>
+                <select id="ddlPRID" class="selectpicker" data-live-search="true"></select>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 hidden">
+                <label for="ddlUNITID">Unit Name</label>
+                <select id="ddlUNITID" class="selectpicker" data-live-search="true"></select>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 hidden">
+                <label for="ddlLineNumber">Line Number</label>
+                <select id="ddlLineNumber" class="selectpicker" data-live-search="true"></select>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2" style="padding-top: 32px;">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="chkCurrentDate">
+                    <label class="form-check-label" for="chkCurrentDate">Current Date Only</label>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-1 col-lg-1" style="padding-top: 25px;">
+                <button id="btnLoad" class="btn btn-primary"><i class="fa fa-download"></i> Load</button>
+            </div>
+        </div>
+        
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12 col-md-5 col-lg-5">
+                <div id="divPlanDateInformation">
+
+                </div>
+                <div id="divPlanLineInformation" style="margin-top:20px;">
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-7 col-lg-7">                
+                <div id="divTodayDateInformation">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .panel.panel-headline .panel-heading {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .panel .panel-heading {
+        padding-top: 5px;
+        padding-bottom: 0px;
+        position: relative;
+    }
+
+    .form-control.k-widget {
+        padding: 0;
+        width: 100%;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 5px;
+    }
+
+    .yearpicker-items {
+        font-size: 10pt;
+    }
+
+    .yearpicker-current {
+        font-size: 10pt;
+    }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .k-grid-header th.k-header > .k-link {
+        text-align: center;
+        font-weight: 600;
+        font-size: 10pt;
+    }
+    .k-grid td {
+        padding: .5em .5em !important;
+        text-align: center;
+    }
+    .k-grid th {
+        text-align: center !important;
+    }
+</style>

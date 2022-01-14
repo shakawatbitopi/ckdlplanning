@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "PR Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap" rel="stylesheet" />
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/ProductionReference.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h4 class="panel-title" style="width:25%;color: darkblue;">Production Reference Information</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 15px;">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <label for="ddlCompany">PRID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="txtPRID" disabled style="padding: 0;text-align: center;" />
+                        <span class="input-group-addon">
+                            <button id="btnNew" class="btn btn-primary" style="padding-left: 10px;padding-right: 10px;">
+                                <strong>N</strong>
+                            </button>
+                            <button style="padding-left: 10px;padding-right: 10px;" id="btnFind" class="btn btn-primary">
+                                <i class="fa fa-filter"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <label for="ddlCompany">Company</label>
+                    <select id="ddlCompany" class="selectpicker"></select>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <label for="ddlBuyer">Buyer</label>
+                    <select id="ddlBuyer" class="selectpicker" data-live-search="true"></select>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <label for="ddlStyleType">Style Type</label>
+                    <select id="ddlStyleType" class="form-control">
+                        <option value="BOTTOM">BOTTOM</option>
+                        <option value="JACKETS">JACKETS</option>
+                        <option value="SHIRTS/DRESS">SHIRTS/DRESS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <label for="ddlProductType">Product Type</label>
+                    <select id="ddlProductType" class="selectpicker" data-live-search="true"></select>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <label for="ddlFileRef">File Ref</label>
+                    <select id="ddlFileRef" class="selectpicker" multiple="multiple" data-live-search="true"></select>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <label for="ddlStatus">Status</label>
+                    <div class="input-group">
+                        <select id="ddlStatus" class="selectpicker">
+                            <option value="ACTIVE">ACTIVE</option>
+                            <option value="PROJECTED">PROJECTED</option>
+                            <option value="PENDING">PENDING</option>
+                            <option value="TO CLOSE">TO CLOSE</option>
+                            <option value="PDN COMPLETE">PDN COMPLETE</option>
+                            <option value="CLOSED">CLOSED</option>
+                            <option value="RUNNING">RUNNING</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <button id="btnLoad" class="btn btn-primary" style="padding-left: 10px;padding-right: 10px;">
+                                <i class="fa fa-download"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;border: 1px solid #ddd;padding-top: 15px;padding-bottom: 15px;">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div id="divEOInformation">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalPRInformation" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">PR Information</h4>
+            </div>
+            <div class="modal-body" style="overflow:scroll;">
+                <div class="row" style="padding: 0px 15px 0px 15px; margin-top: -15px;">
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: #d9ecf5; padding: 1px 16px 1px 10px;">
+                        <input id='Kendofilter' style='float: right;' class='k-textbox' placeholder='Search..' />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div id="divPRInformation">
+
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .panel .panel-heading {
+        padding-top: 15px;
+        padding-bottom: 0px;
+        position: relative;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .input-group-addon {
+        padding: 0px 0px;
+    }
+
+    .bs3-has-addon {
+        width: 100%;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+
+    .k-footer-template {
+        text-align: center !important;
+    }
+</style>

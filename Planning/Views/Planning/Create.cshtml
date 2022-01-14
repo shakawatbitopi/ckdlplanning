@@ -1,0 +1,251 @@
+﻿
+@{
+    ViewBag.Title = "PR Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h4 class="panel-title" style="width:25%;">Production Reference Information</h4>
+        <table class="table table-condensed pull-right" style="width:50%;margin-top: -35px;">
+            <tbody>
+                <tr>
+                    <td>Order Qty</td>
+                    <td><span id="spOrderQty"></span></td>
+                    <td>Selected Qty</td>
+                    <td><span id="spSelectedQty"></span></td>
+                    <td>Eo Plan Qty</td>
+                    <td><span id="spEOPlanQty"></span></td>
+                    <td>Remaining Plan Qty</td>
+                    <td><span id="spRemainingPlanQty"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabs-1">PR Information</a></li>
+                    <li><a href="#tabs-2">Export Order Information</a></li>
+                    <li><a href="#tabs-3">Line Information</a></li>
+                    <li><a href="#tabs-4">File Ref Information</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">PR ID</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="txtPRID" readonly class="form-control" />
+                                <span class="input-group-addon" style="padding:0px;"><button class="btn btn-primary" style="padding:6px;">Find</button> </span>
+                                <span class="input-group-addon" style="padding:0px;"><button id="btnNew" class="btn btn-success" style="padding:6px;">New</button> </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="ddlFileRef">File Ref</label>
+                                <select id="ddlFileRef" class="selectpicker" multiple data-live-search="true"></select> 
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-1 col-lg-1">
+                            <div class="form-group">
+                                <label for="txtPRID">VAS SAM</label>
+                                <input type="text" id="txtVASSAM" class="form-control txt CMI" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-1 col-lg-1">
+                            <div class="form-group">
+                                <label for="txtPRID">SAM</label>
+                                <input type="text" id="txtUserSAM" class="form-control txt CMI" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">No Of Work Station</label>
+                                <input type="text" id="txtWorkStation" class="form-control txt CMI" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Work Time(Minutes)</label>
+                                <input type="text" id="txtWorkTime" class="form-control txt CMI" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Org Efficiency</label>
+                                <input type="text" id="txtOrgEfficiency" class="form-control txt CMI" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Hourly Target</label>
+                                <input type="text" id="txtHourlyTarget" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Min Line Days Req</label>
+                                <input type="text" id="txtMinimumLineDays" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Allocated Line</label>
+                                <input type="text" id="txtAllocatedLine" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Plan Start Date</label>
+                                <input type="text" id="txtPlanStartDate" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Plan End Date</label>
+                                <input type="text" id="txtPlanEndDate" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Finish Days</label>
+                                <input type="text" id="txtFinishDays" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Excess(%)</label>
+                                <input type="text" id="txtExcessQty" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Hourly Target(100%)</label>
+                                <input type="text" id="txtHourlyTargetPercent" class="form-control" disabled readonly />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Daily Target Per Line</label>
+                                <input type="text" id="txtDailyTargetPerLine" class="form-control" disabled readonly />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Require Line Days</label>
+                                <input type="text" id="txtRequireLineDays" class="form-control" disabled readonly />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">No of line Req</label>
+                                <input type="text" id="txtNoOfLineReq" class="form-control" disabled readonly />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="txtPRID">Priority No</label>
+                                <input type="text" id="txtPriorityNo" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div id="divEOInformation">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabs-2">
+                    
+                </div>
+                <div id="tabs-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div id="divLineInformation">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabs-4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div id="divFileRef">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/PRCreate.js")?@Common.AppSettings.Version"></script>
+<link href="https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap" rel="stylesheet">
+<style type="text/css">
+    .panel.panel-headline .panel-heading {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .panel .panel-heading {
+        padding-top: 5px;
+        padding-bottom: 1px;
+        position: relative;
+    }
+
+    #tblDates .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+        text-align: center;
+        color: #000;
+        font-size: 8pt;
+        padding: 2px;
+        padding-left: 2px;
+        font-weight: 600;
+        vertical-align: middle;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 0px;
+        font-weight: 600;
+        color: #454545;
+        font-size: 12pt;
+        font-family: 'Darker Grotesque', sans-serif;
+    }
+
+    .form-group {
+        margin-bottom: 0px;
+    }
+
+    .table {
+        margin-bottom: 0px;
+    }
+
+    .k-grid td {
+        font-size: 8.6pt;
+        font-family: tahoma;
+    }
+
+    .k-link {
+        font-size: 9pt;
+        font-weight: 600;
+        text-align: center;
+    }
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+</style>

@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "File Ref";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/ProductionUpdateList.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h4 class="panel-title" style="width:25%;">Day Wise Production Update Status</h4>
+        <hr />
+    </div>
+    <div class="panel-body">
+        <div class="row" style="margin-top: -30px;">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtPlanDate">Company</label>
+                <select class="form-control" id="ddlCompany">
+                    <option value="04,06,09,08">ALL</option>
+                    <option value="04">BGL</option>
+                    <option value="08">KTL</option>
+                    <option value="06">TAL</option>
+                    <option value="09">RHL</option>
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtPlanDate">Select Plan Date</label>
+                <input type="text" id="txtPlanDate" class="form-control txt" />
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2" style="padding-top: 20px;">
+                <button id="btnLoadData" class="btn btn-primary">Load Data</button>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div id="divProductionUpdate">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .panel .panel-heading {
+        padding-top: 5px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+    }
+
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+
+    .spGreen {
+        background-color: green;
+        padding: 5px;
+        color: #fff;
+        display: block;
+    }
+
+    .spYellow {
+        background-color: gray;
+        padding: 5px;
+        color: #fff;
+        display: block;
+    }
+
+    .spRed {
+        background-color: red;
+        padding: 5px;
+        color: #fff;
+        display: block;
+    }
+</style>

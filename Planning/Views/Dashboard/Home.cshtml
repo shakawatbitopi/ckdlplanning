@@ -1,0 +1,687 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/Dashboard.js")?@Common.AppSettings.Version"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="~/Scripts/Chart.min.js"></script>
+
+@*<script type="text/javascript">
+        $(function () {
+            LoadDashboardData();
+        });
+        function LoadDashboardData() {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: baseURL + "/Dashboard/LoadDashboardData",
+                data: {},
+                async: true,
+                datatype: "json",
+                success: function (data) {
+                    LoadLineWiseBarChart(data.LineSummaryData, 'chartcontainer');
+                    LoadBuyerWiseBarChart(data.BuyerSummaryData, 'buyerchartcontainer');
+                    LoadCompanyWisePieChart(data.CompanySummaryData, 'companychartcontainer');
+                    LoadDateWiseBarChart(data.PlanDateSummaryData, 'plandatechartcontainer');
+                }
+            });
+        }
+        function LoadLineWiseBarChart(data, chartcontainer) {
+
+            var Categories = [];
+            var LabelData = [];
+
+            $.each(data, function (i, item) {
+                Categories.push(item.LineNumber);
+                LabelData.push(parseInt(item.LineDayQty));
+            });
+
+            Highcharts.chart(chartcontainer, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Line Wise Quantity'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: Categories,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Order Qty (PCS)'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} pcs</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Line Wise Qty',
+                    data: LabelData,
+
+                },]
+            });
+        }
+        function LoadBuyerWiseBarChart(data, chartcontainer) {
+
+            var Categories = [];
+            var LabelData = [];
+
+            $.each(data, function (i, item) {
+                Categories.push(item.Buyer);
+                LabelData.push(parseInt(item.LineDayQty));
+            });
+
+            Highcharts.chart(chartcontainer, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Buyer Wise Quantity'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: Categories,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Order Qty (PCS)'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} pcs</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Buyer Wise Qty',
+                    data: LabelData,
+
+                },]
+            });
+        }
+        function LoadDateWiseBarChart(data, chartcontainer) {
+
+            var Categories = [];
+            var LabelData = [];
+
+            $.each(data, function (i, item) {
+                Categories.push(item.LineDate);
+                LabelData.push(parseInt(item.LineDayQty));
+            });
+
+            Highcharts.chart(chartcontainer, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Month Wise Quantity'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: Categories,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Order Qty (PCS)'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} pcs</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Month Wise Qty',
+                    data: LabelData,
+
+                },]
+            });
+        }
+        function LoadCompanyWisePieChart(data, ID) {
+            var oilCanvas = document.getElementById(ID);
+            Chart.defaults.global.defaultFontFamily = "Lato";
+            Chart.defaults.global.defaultFontSize = 18;
+
+            var LabelNames = [];
+            var LabelData = [];
+
+            $.each(data, function (i, item) {
+                LabelNames.push(item.Company);
+                LabelData.push(item.LineDayQty);
+            });
+
+            var oilData = {
+                //labels: ["Saudi Arabia","Russia","Iraq","United Arab Emirates","Canada"],
+                labels: LabelNames,
+                datasets: [
+                    {
+                        //data: [133.3, 86.2, 52.2, 51.2, 50.2],
+                        data: LabelData,
+                        backgroundColor: [
+                            "#FF6384",
+                            "#63FF84",
+                            "#6384FF",
+                            "#84FF63",
+                            "#8463FF",
+                            "#808000"
+                        ]
+                    }]
+            };
+
+            var pieChart = new Chart(oilCanvas, {
+                type: 'pie',
+                data: oilData
+            });
+        }
+    </script>*@
+
+<div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-8">
+        <div class="divCard">
+            <div class="divCardTitle">
+                <div class="com-sm-12 col-md-4 col-lg-4">
+                    <button data-company="ALL" class="btn btn-block btnPlanSummary btnFilter">All</button>
+                    <span id="spFactory" class="hidden"></span>
+                </div>
+                <div class="com-sm-12 col-md-2 col-lg-2">
+                    <button data-company="06" class="btn btn-primary btn-block btnPlanSummary">TAL</button>
+                </div>
+                <div class="com-sm-12 col-md-2 col-lg-2">
+                    <button data-company="09" class="btn btn-danger btn-block btnPlanSummary">RHL</button>
+                </div>
+                <div class="com-sm-12 col-md-2 col-lg-2">
+                    <button data-company="04" class="btn btn-success btn-block btnPlanSummary">BGL</button>
+                </div>
+                <div class="com-sm-12 col-md-2 col-lg-2">
+                    <button data-company="08" class="btn btn-warning btn-block btnPlanSummary">KTL</button>
+                </div>
+            </div>
+            <div class="divCardBody">
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
+                        <div class="widget-chart-content">
+                            <div class="widget-subheading">BOOKED QTY</div>
+                            <div id="divBookedQty" class="widget-numbers qtyCounter cursorPointer"></div>
+                        </div>
+                    </div>
+                    <div class="divider m-0 d-md-none d-sm-block"></div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
+                        <div class="widget-chart-content">
+                            <div id="divMonthBookedQtyTitle" class="widget-subheading"></div>
+                            <div id="divMonthBookedQty" class="widget-numbers qtyCounter"></div>
+                        </div>
+                    </div>
+                    <div class="divider m-0 d-md-none d-sm-block"></div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
+                        <div class="widget-chart-content">
+                            <div id="divMonthProduceQtyTitle" class="widget-subheading"></div>
+                            <div id="divMonthProduceQty" class="widget-numbers qtyCounter"></div>
+                        </div>
+                    </div>
+                    <div class="divider m-0 d-md-none d-sm-block"> </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-xl-12 divider">
+                    <hr />
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
+                        <div class="widget-chart-content">
+                            <div class="widget-subheading">ACTIVE PR</div>
+                            <div id="divActivePR" class="widget-numbers qtyCounter"></div>
+                        </div>
+                    </div>
+                    <div class="divider m-0 d-md-none d-sm-block"> </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
+                        <div class="widget-chart-content">
+                            <div class="widget-subheading">ACTIVE LINES</div>
+                            <div id="divActiveLines" class="widget-numbers qtyCounter"></div>
+                        </div>
+                    </div>
+                    <div class="divider m-0 d-md-none d-sm-block"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalPRQuantityInformation" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Plan Quantity Information</h4>
+            </div>
+            <div class="modal-body" style="padding:2px;">                
+                <div id="divPlanQuantity">
+
+                </div>
+            </div>
+            <div class="modal-footer hidden">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-headline hidden">
+    <div class="panel-heading" style="border-bottom: 1px solid #eee; padding-bottom: 10px; padding-top: 5px;">
+        <h3 class="panel-title">Planning Overview</h3>
+    </div>
+    <div class="panel-body">
+
+        @*<div class="row">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#lineWiseQty">Line</a></li>
+                    <li><a data-toggle="tab" href="#buyerWiseQty">Buyer</a></li>
+                    <li><a data-toggle="tab" href="#monthWiseQty">Month</a></li>
+                    <li><a data-toggle="tab" href="#companyWiseQty">Company</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="lineWiseQty" class="tab-pane fade in active">
+                        <figure class="highcharts-figure">
+                            <div id="chartcontainer"></div>
+                        </figure>
+                    </div>
+                    <div id="buyerWiseQty" class="tab-pane fade">
+                        <figure class="highcharts-figure">
+                            <div id="buyerchartcontainer"></div>
+                        </figure>
+                    </div>
+                    <div id="monthWiseQty" class="tab-pane fade">
+                        <figure class="highcharts-figure">
+                            <div id="plandatechartcontainer"></div>
+                        </figure>
+                    </div>
+                    <div id="companyWiseQty" class="tab-pane fade">
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <canvas id="companychartcontainer" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+
+                </div>
+                <div class="col-md-3">
+
+
+                </div>
+            </div>*@
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div id="divLineSummary">
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div id="divUnMappedFileRef">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<style type="text/css">
+    
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+        background-color: #ddd;
+        font-weight: 600;
+    }
+
+    text {
+        font-family: 'Pacifico', cursive;
+    }
+
+    .nav-tabs > li > a {
+        font-family: 'Pacifico', cursive;
+    }
+</style>*@
+<style type="text/css">
+    .k-grid td {
+        font-size: 12px !important;
+    }
+
+    .k-popup .k-list .k-item {
+        font-size: 9pt !important;
+    }
+
+    .k-state-default > .k-select {
+        font-size: 10pt;
+    }
+
+    .k-grid-header th.k-header {
+        vertical-align: middle !important;
+    }
+    #divPlanQuantity .k-grid-content {
+        max-height: 60vh;
+    }
+    .btn-outline-primary {
+        color: #007bff;
+        border-color: #007bff;
+    }
+</style>
+<style>
+    .btnFilter:before {
+        content: '✓';
+        margin-right: 10px;
+        font-size: 11pt;
+    }
+
+    .cursorPointer {
+        cursor: pointer;
+    }
+    .divCard {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(26, 54, 126, 0.125);
+        border-radius: 0.25rem;
+    }
+
+    .divCardTitle {
+        border: 1px solid rgba(26, 54, 126, 0.125);
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .divCardBody {
+        min-height: 20px;
+    }
+    .widget-chart {
+        text-align: center;
+        padding: 1rem;
+        position: relative
+    }
+
+        .widget-chart .progress-sub-label {
+            opacity: .8;
+            padding: 5px 0 0
+        }
+
+        .widget-chart .progress-circle-wrapper {
+            min-width: 68px;
+            margin-right: 1rem
+        }
+
+            .widget-chart .progress-circle-wrapper .react-sweet-progress-symbol {
+                font-size: .8rem
+            }
+
+        .widget-chart .widget-chart-content {
+            position: relative;
+            z-index: 5
+        }
+
+        .widget-chart .widget-chart-content-lg {
+            padding: 2rem 0 1rem 2rem
+        }
+
+            .widget-chart .widget-chart-content-lg .widget-numbers {
+                margin-bottom: 0
+            }
+
+        .widget-chart .widget-chart-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            opacity: .25;
+            z-index: 4;
+            border-bottom-right-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+            overflow: hidden
+        }
+
+        .widget-chart .widget-numbers {
+            font-weight: bold;
+            font-size: 2.5rem;
+            display: block;
+            line-height: 1;
+            margin: 1rem;
+            text-align: center;
+        }
+
+            .widget-chart .widget-numbers + .widget-chart-flex, .widget-chart .widget-numbers + .widget-description, .widget-chart .widget-numbers + .widget-subheading {
+                margin-top: -.5rem
+            }
+
+        .widget-chart .widget-subheading {
+            margin: -0.5rem 0 0;
+            display: block;
+            opacity: .6
+        }
+
+            .widget-chart .widget-subheading:first-child {
+                margin-top: 0
+            }
+
+            .widget-chart .widget-subheading + .widget-numbers {
+                margin-top: .5rem
+            }
+
+        .widget-chart .widget-description {
+            margin: 1rem 0 0
+        }
+
+        .widget-chart.widget-chart-hover {
+            transition: all .2s
+        }
+
+            .widget-chart.widget-chart-hover:hover {
+                z-index: 15;
+                transform: scale(1.15);
+                box-shadow: 0 0.46875rem 4.1875rem rgba(4,9,20,0.05),0 0.9375rem 2.40625rem rgba(4,9,20,0.05),0 0.25rem 1.3125rem rgba(4,9,20,0.06),0 0.125rem 1.1875rem rgba(4,9,20,0.06);
+                cursor: pointer;
+                background: #fff
+            }
+
+        .widget-chart .widget-chart-actions {
+            position: absolute;
+            right: .5rem;
+            top: .5rem;
+            z-index: 12
+        }
+
+            .widget-chart .widget-chart-actions .btn-link {
+                font-size: 1.1rem;
+                padding-top: 0;
+                padding-bottom: 0;
+                opacity: .6
+            }
+
+        .widget-chart .widget-progress-wrapper {
+            margin-top: 1rem
+        }
+
+            .widget-chart .widget-progress-wrapper.progress-wrapper-bottom {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%
+            }
+
+                .widget-chart .widget-progress-wrapper.progress-wrapper-bottom .progress {
+                    margin: 0 -1px -1px
+                }
+
+                .widget-chart .widget-progress-wrapper.progress-wrapper-bottom .progress {
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: .25rem;
+                    border-bottom-left-radius: .25rem
+                }
+
+                    .widget-chart .widget-progress-wrapper.progress-wrapper-bottom .progress .progress-bar {
+                        border-bottom-left-radius: .25rem
+                    }
+
+        .widget-chart .widget-chart-flex {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            margin-bottom: 1rem
+        }
+
+            .widget-chart .widget-chart-flex:last-child {
+                margin-bottom: 0
+            }
+
+            .widget-chart .widget-chart-flex .widget-subheading {
+                margin: 0
+            }
+
+            .widget-chart .widget-chart-flex .widget-description {
+                margin-top: 0
+            }
+
+        .widget-chart.text-left {
+            flex-direction: row;
+            align-items: center
+        }
+
+            .widget-chart.text-left .icon-wrapper {
+                min-width: 54px;
+                margin: 0 1rem 0 0
+            }
+
+            .widget-chart.text-left .widget-numbers {
+                margin-left: 0
+            }
+
+            .widget-chart.text-left .widget-chart-content {
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                flex: 1;
+                position: relative
+            }
+
+                .widget-chart.text-left .widget-chart-content > .widget-numbers:first-child {
+                    margin-top: 0
+                }
+
+                .widget-chart.text-left .widget-chart-content .widget-description {
+                    align-self: flex-start
+                }
+
+            .widget-chart.text-left .widget-chart-wrapper {
+                height: 35%
+            }
+
+        .widget-chart.widget-chart-left {
+            padding-bottom: 15%
+        }
+
+        .widget-chart .chart-wrapper-relative {
+            position: relative;
+            opacity: 1;
+            margin-top: 1rem
+        }
+
+    .widget-chart-actions {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        z-index: 12
+    }
+
+        .widget-chart-actions .btn-link {
+            font-size: 1.1rem;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: .6
+        }
+
+    .widget-chart:hover .widget-chart-actions .btn-link, .widget-content:hover .widget-chart-actions .btn-link {
+        opacity: 1
+    }
+
+    .grid-menu .widget-chart.widget-chart-hover:hover {
+        background: #fff;
+        border-radius: .25rem
+    }
+
+    .icon-wrapper {
+        width: 54px;
+        height: 54px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden
+    }
+
+        .icon-wrapper[class*="border-"] {
+            border-width: 1px;
+            border-style: solid
+        }
+
+        .icon-wrapper .icon-wrapper-bg {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 3;
+            opacity: .2
+        }
+
+            .icon-wrapper .icon-wrapper-bg.bg-light {
+                opacity: .08
+            }
+</style>

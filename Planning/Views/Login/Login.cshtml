@@ -1,0 +1,132 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="~/Content/Login/images/icons/login_2.png" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/main.css">
+
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('../Content/Login/images/bg.jpeg');">
+            <div class="wrap-login100 p-t-30 p-b-50">
+                <span class="login100-form-title p-b-41" id="divCompany">
+                    <span id="spCompanyName"></span>
+                </span>
+                <form class="login100-form validate-form p-b-33 p-t-5">
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input class="input100" type="text" id="username" placeholder="User name" />
+                        <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" type="password" id="pass" placeholder="Password" />
+                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                    </div>
+                    <div class="container-login100-form-btn m-t-32">
+                        <button id="btnLogin" class="login100-form-btn">
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="dropDownSelect1"></div>
+    <script src="~/Content/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Login/vendor/animsition/js/animsition.min.js"></script>
+    <script src="~/Content/Login/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Content/Login/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/Login/vendor/select2/select2.min.js"></script>
+    <script src="~/Content/Login/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Content/Login/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Content/Login/vendor/countdowntime/countdowntime.js"></script>
+    <script src="~/Content/Login/js/main.js"></script>
+    <script src="~/CustomContents/js/LogIn.js"></script>
+    <script type="text/javascript">
+        var baseURL = "@Common.AppSettings.BaseURL";
+
+        //$(function () {
+        //    navigator.geolocation.getCurrentPosition(showPosition);
+        //});
+        //function showPosition(position) {
+        //    alert(position.coords.latitude +" - "+ position.coords.longitude);
+        //}
+        window.onload = function () {            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(UserLocation);
+            }
+        }
+
+        function UserLocation(position) {
+            NearestCity(position.coords.latitude, position.coords.longitude);
+        }
+
+
+        // Convert Degress to Radians
+        function Deg2Rad(deg) {
+            return deg * Math.PI / 180;
+        }
+
+        function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+            lat1 = Deg2Rad(lat1);
+            lat2 = Deg2Rad(lat2);
+            lon1 = Deg2Rad(lon1);
+            lon2 = Deg2Rad(lon2);
+            var R = 6371; // km
+            var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+            var y = (lat2 - lat1);
+            var d = Math.sqrt(x * x + y * y) * R;
+            return d;
+        }
+
+        var lat = 20; // user's latitude
+        var lon = 40; // user's longitude
+
+        var cities = [
+            ["TAL", 23.905844, 90.051708, "Tarasima Apparels Limited"],
+            ["RHL", 23.681491, 90.517107, "Remi Holdings Limited"],
+            ["BGL", 23.444161, 91.183194, "Baridhi Garments Ltd"],
+            ["MGL", 23.813209, 90.367362, "Misami Garments Ltd"],
+            ["KTL", 23.791804, 90.269412, "Kaifeng Textiles Ltd"],
+            ["CKDL", 23.947269, 90.274376, "CROYDON-KOWLOON DESIGNS LIMITED"]
+            ];
+
+        function NearestCity(latitude, longitude) {
+            var minDif = 99999;
+            var closest;
+
+            for (index = 0; index < cities.length; ++index) {
+                var dif = PythagorasEquirectangular(latitude, longitude, cities[index][1], cities[index][2]);
+                if (dif < minDif) {
+                    closest = index;
+                    minDif = dif;
+                }
+            }
+
+            var location = cities[closest] + '';
+            var nameArr = location.split(',');
+            $("#spCompanyName").text("");
+            $("#spCompanyName").text(nameArr[3]);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "PR Process";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/ProductionProcess.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h4 class="panel-title" style="width:25%;">Production Process</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 10px;height:100vh;">           
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div id="divPendingPlanDateInformation">
+
+                </div>
+                <script type="text/x-kendo-template" id="template">
+                    <div class="tabstrip">
+                        <div style="background-color:rgb(244, 246, 249)">
+                            <div class="orders"></div>
+                        </div>
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+    <div id="loading-div-background">
+        <div id="loading-div" class="ui-corner-all">
+            <img style="" src="~/Content/klorofil/demo_gif.gif" alt="Loading.." />
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .panel .panel-heading {
+        padding-top: 15px;
+        padding-bottom: 0px;
+        position: relative;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    #loading-div-background {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        height: 100%;
+    }
+
+    #loading-div {
+        width: 300px;
+        height: 150px;
+        background-color: #fff;
+        /*border: 5px solid #1468b3;*/
+        text-align: center;
+        color: #202020;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -100px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        behavior: url("/css/pie/PIE.htc"); /* HANDLES IE */
+    }
+
+</style>

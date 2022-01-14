@@ -1,0 +1,546 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/PRInformation.js")?@Common.AppSettings.Version"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/PRInformationPRMatrix.js")?@Common.AppSettings.Version"></script>
+
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="font-family: 'Pacifico', cursive">Production Reference</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row" style="border-top: 1px solid #ddd;padding-top: 10px;padding-bottom: 0px;">
+            <div class="row">
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="ddlCompany">PRID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control txt" id="txtPRID" disabled style="padding: 0;text-align: center;" />
+                        <span class="input-group-addon">
+                            <button id="btnNew" class="btn btn-primary" style="padding-left: 10px;padding-right: 10px;">
+                                <strong>N</strong>
+                            </button>
+                            <button style="padding-left: 10px;padding-right: 10px;" id="btnFind" class="btn btn-primary">
+                                <i class="fa fa-filter"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="ddlCompany">Company</label>
+                    <select id="ddlCompany" class="form-control"></select>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="ddlBuyer">Buyer</label>
+                    <select id="ddlBuyer" class="selectpicker" data-live-search="true"></select>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="ddlProductType">Product Type</label>
+                    <select id="ddlProductType" class="selectpicker" data-live-search="true"></select>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <label for="ddlFileRef">File Ref</label>
+                    <select id="ddlFileRef" class="selectpicker" multiple="multiple" data-live-search="true" data-actions-box="true"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="ddlStyleType">Style Type</label>
+                    <select id="ddlStyleType" class="form-control">
+                        <option value="BOTTOMS">BOTTOMS</option>
+                        <option value="BOTTOMS - SPECIAL CASE">BOTTOMS - SPECIAL CASE</option>
+                        <option value="JACKETS">JACKETS</option>
+                        <option value="SHIRTS/DRESS">SHIRTS/DRESS</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtTotalOrderQty">Selected Order Qty(PCS)</label>
+                    <input type="text" id="txtTotalOrderQty" class="form-control txt" disabled="">
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="ddlQuantityFactor">Quantity Factor</label>
+                    <select id="ddlQuantityFactor" class="form-control">
+                        <option value="1">1 PCS</option>
+                        <option value="2">2 PCS</option>
+                        <option value="3">3 PCS</option>
+                        <option value="4">4 PCS</option>
+                        <option value="5">5 PCS</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtOrderQty">Total Order Qty(PCS)</label>
+                    <input type="text" id="txtOrderQty" class="form-control txt" disabled="">
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtExtraPercentage">Extra (%)</label>
+                    <input type="text" id="txtExtraPercentage" class="form-control numericDecimal txt">
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtPlanProduction">Plan Production (PCS)</label>
+                    <input type="text" id="txtPlanProduction" class="form-control txt" disabled="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtBulletinID">Bulletin ID</label>
+                    <input type="text" id="txtBulletinID" class="form-control txt" disabled="">
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtSAM">SAM</label>
+                    <div class="input-group">
+                        <input type="text" id="txtSAM" class="form-control numericDecimal txt">
+                        <span class="input-group-addon">
+                            <button style="padding-left: 10px;padding-right: 10px;" id="btnFindSAM" class="btn btn-primary">
+                                <i class="fa fa-filter"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtPCD">PCD Date</label>
+                    <input type="text" id="txtPCD" class="form-control txt" readonly />
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtPlanStartDate">Plan Start Date</label>
+                    <input type="text" id="txtPlanStartDate" class="form-control txt" />
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtLineAllocated">Line Allocated</label>
+                    <input type="text" id="txtLineAllocated" class="form-control txt">
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="ddlStatus">Status</label>
+                    <select id="ddlStatus" class="form-control">
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="PROJECTED">PROJECTED</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="TO CLOSE">TO CLOSE</option>
+                        <option value="PDN COMPLETE">PDN COMPLETE</option>
+                        <option value="CLOSED">CLOSED</option>
+                        <option value="RUNNING">RUNNING</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtTotalWorkingMinutes">Total Working Minutes</label>
+                    <input type="text" id="txtTotalWorkingMinutes" class="form-control txt" />
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtTotalWorkingMinutes">Repeat Order</label>
+                    <select id="ddlRepeatOrder" class="form-control">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2">
+                    <label for="txtPriorityNo">Priority No</label>
+                    <input type="text" id="txtPriorityNo" class="form-control numericDecimal txt" />
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <label for="txtPriorityNo">Custom Matrix Line Numbers</label>
+                    <input type="text" id="txtCustomMatrixLineNumber" class="form-control txt" readonly />
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2 hidden">
+                    <label id="lblTotalLineCount"><span style="cursor: pointer;" id="spTotalLineCount">0</span> </label>
+                </div>
+                <div class="col-sm-12 col-md-2 col-lg-2" style="padding-top: 22px;">
+                    <button id="btnLoad" class="btn btn-primary btn-block" style="padding-left: 10px;padding-right: 10px;">
+                        <i class="fa fa-download"></i> Load Data
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 5px;border-top: 1px solid #ddd;padding-top: 0px;padding-bottom: 15px;">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+
+            </div>
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabs-1" style="font-family: 'Source Sans Pro', sans-serif;"><ion-icon name="list-outline"></ion-icon> EO Information</a></li>
+                    <li><a href="#tabs-2"><ion-icon name='cellular-outline'></ion-icon> Line Information</a></li>
+                </ul>
+                <div id="button-wrapper">
+                    <button id="btnLoadPRMAtrix" class="btn btn-success hidden" style="text-transform: uppercase; font-size: 9pt; padding: 9px; font-weight: 600; font-family: Cascadia Mono;">
+                        <i class="fa fa-plus-circle fa-fw"></i>Create PR Matrix
+                    </button>
+                    <button id="btnSavePRMaster" class="example_d" style="padding-left: 10px; padding-right: 10px; float: right;">
+                        <i class="fa fa-check"></i> Save
+                    </button>
+                </div>
+                <div id="tabs-1">
+                    <div style="height: 33px; padding-left: 2px;">
+                        <input filter-id='divEOInformation' class='KendoCommonfilter k-textbox' placeholder='Search..' style="z-index: 9;" />
+                    </div>
+                    <div id="divEOInformation" style="margin-top: -35px;">
+
+                    </div>
+                </div>
+                <div id="tabs-2" style="overflow:hidden;">
+                    <div id="divLineInformation">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalPRInformation" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">PR Information</h4>
+            </div>
+            <div class="modal-body" style="overflow:scroll;">
+                <div class="row" style="padding: 0px 15px 0px 15px; margin-top: -15px;">
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: #d9ecf5; padding: 1px 16px 1px 10px;">
+                        <input id='Kendofilter' style='float: right;' class='k-textbox' placeholder='Search..' />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div id="divPRInformation">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalMoveLine" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Move Line Data</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label>From Line Number</label>
+                        <input type="text" id="txtFromLineNumber" class="form-control" disabled="disabled" />
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label>From To Number</label>
+                        <input type="text" id="txtToLineNumber" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnMoveLineData" type="button" class="btn btn-primary">Move Line Data</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalSAMEfficiency" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Matrix Efficiency</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div id="divMatrixEfficiency">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>*@
+        </div>
+    </div>
+</div>
+<div id="modalPRWiseMatrixfficiency" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">PR Wise Matrix</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label>From Day</label>
+                            <input id='txtStartDay' type='text' class='form-control mtxtEff' placeholder='From Day No..' />
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label>To Day</label>
+                            <input id='txtEndDay' type='text' class='form-control mtxtEff' placeholder='End Day No..' />
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label>Efficiency</label>
+                            <input id='txtEfficiency' type='text' class='form-control mtxtEff' placeholder='Efficiency..' />
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label>Quantity</label>
+                            <input id='txtQuantity' type='text' class='form-control mtxtEff' placeholder='Quantity..' />
+                        </div>
+                        <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                            <a id='btnUpdateEfficiency' role='button' class='k-button k-button-icontext k-grid-edit btn-block' href='javascript:void(0)'><span class='k-icon k-i-download'></span>Update</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-8 col-lg-8">
+                        <div id="divPRWiseMatrixfficiency">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="btnSideBarClick" class="btn btn-primary btn-sm hidden" data-toggle-sidebar="sidebar2" aria-label="Toggle the document main sidebar visibility" style="margin-top:25px;"><i class="fa fa-bars"></i></button>
+<div id="sidebar2" class="sidebarRight" aria-label="Main sidebar containing navigation links and some information" aria-hidden="true">
+    <div class="sidebar__content">
+        <div class="sidebarHeader">
+            <center><button data-toggle-sidebar="sidebar2" style="border: none;background: #313129;">Close Menu →</button></center>
+        </div>
+        <div id="sideBarContent">
+
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt !important;
+        /*border-width: 0px !important;*/
+        padding: .2em .4em !important;
+        line-height: 1.2em !important;
+        font-family: "Source Sans Pro", sans-serif;
+    }
+
+    td {
+        border-top: 1px solid #ddd !important;
+        border-top-width: 1px;
+        border-width: 1px 0 0 !important;
+        border-bottom-width: 0px;
+        border-left-width: 0px;
+        border-bottom: 1px solid #ddd !important;
+        border-left: 1px solid #ddd !important;
+        padding: .2em .2em !important;
+        line-height: 1.2em !important;
+        font-size: 9.5pt !important;
+    }
+
+    .panel .panel-heading {
+        padding-top: 5px;
+        padding-bottom: 0px;
+        position: relative;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+    }
+
+    .input-group-addon {
+        padding: 0px 0px;
+    }
+
+    .bs3-has-addon {
+        width: 100%;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+
+    .k-footer-template {
+        text-align: center !important;
+    }
+
+    .form-control.k-widget {
+        width: 100%;
+    }
+
+    #button-wrapper {
+        margin-top: -39px;
+        float: right;
+        width: 400px;
+    }
+
+    .ui-tabs .ui-tabs-panel {
+        padding: .2em .2em !important;
+    }
+
+    .example_d {
+        color: #0AF !important;
+        text-transform: uppercase;
+        background: #ffffff;
+        padding: 6px 6px;
+        padding-right: 6px;
+        padding-left: 6px;
+        border: 2px solid #00a0f0 !important;
+        border-radius: 6px;
+        display: inline-block;
+        transition: all 0.3s ease 0s;
+        font-weight: 600;
+    }
+
+        .example_d:hover {
+            color: #494949 !important;
+            border-radius: 50px;
+            border-color: #494949 !important;
+            transition: all 0.3s ease 0s;
+        }
+
+    .lblTitle {
+        font-size: 13px;
+    }
+
+    .tblSpanText {
+        font-family: "Source Sans Pro", sans-serif;
+    }
+
+    #modalSAMEfficiency .k-grid-content {
+        max-height: 50vh;
+    }
+
+    #divPRWiseMatrixfficiency .k-grid-content {
+        max-height: 50vh;
+    }
+</style>
+<style type="text/css">
+    /* SIDEBAR POSITION */
+    .sidebarRight {
+        background-color: #f1f1f1;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        /*min-width: 400px;*/
+        width: 450px;
+        z-index: 999999;
+    }
+
+    .sidebar__content {
+        padding: 8px;
+    }
+    /* SIDEBAR HIDDEN STATE */
+    .sidebarRight[aria-hidden="true"] {
+        transition: 200ms;
+        transform: translateX(100%);
+    }
+    /* SIDEBAR VISIBLE STATE */
+    .sidebarRight:not([aria-hidden]),
+    .sidebarRight[aria-hidden="false"] {
+        transition: 200ms;
+        transform: translateX(0);
+    }
+
+    .sidebarHeader {
+        -moz-appearance: none;
+        background-color: #313129;
+        border: medium none;
+        box-shadow: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        height: 50px;
+        margin: -8px;
+        padding: 12px
+    }
+
+    #sideBarContent {
+        margin-top: 10px;
+        overflow-y: scroll;
+        height: 100vh;
+        padding-bottom: 100px;
+    }
+    /********************/
+    .divCellInfo {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 5px;
+        margin-bottom: 2px;
+        color: #000;
+        font-size: 8pt;
+        font-family: verdana;
+        overflow: hidden;
+    }
+
+    .divPlanDateRow {
+        border-bottom: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    .btnDateDivClose {
+        float: right;
+        color: red;
+        font-size: 11pt;
+        margin-top: -10px;
+    }
+
+    .divPRDateList {
+        max-height: 400px;
+        overflow-y: scroll;
+        padding: 25px;
+    }
+
+    .divDateHide {
+        display: none;
+    }
+
+    #sideBarContent ion-icon {
+        font-size: 17px;
+        color: purple;
+    }
+
+    .spanLineTitle {
+        background-color: yellow;
+        border: 1px solid #ddd;
+        font-weight: 600;
+        padding: 5px 5px 5px 5px;
+    }
+</style>
+<script type="text/javascript">
+    document.querySelectorAll('[data-toggle-sidebar]').forEach(toggle => {
+        toggle.addEventListener('click', e => {
+            const sidebarID = toggle.dataset.toggleSidebar;
+            const sidebarElement = sidebarID ? document.getElementById(sidebarID) : undefined;
+            if (sidebarElement) {
+                let sidebarState = sidebarElement.getAttribute('aria-hidden');
+                sidebarElement.setAttribute('aria-hidden', sidebarState == 'true' ? false : true);
+            }
+        });
+    });
+    let myLabels = document.querySelectorAll('.lbl-toggle');
+
+    Array.from(myLabels).forEach(label => {
+        label.addEventListener('keydown', e => {
+            if (e.which === 32 || e.which === 13) {
+                e.preventDefault();
+                label.click();
+            };
+        });
+    });
+</script>
+<style type="text/css">
+    #divEntryPRMatrix label {
+        font-size: 10pt;
+    }
+</style>

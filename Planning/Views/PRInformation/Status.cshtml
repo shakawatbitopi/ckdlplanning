@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "PR Status";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/PRStatus.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h4 class="panel-title" style="width:25%;">PR  Status</h4>
+        <hr />
+    </div>
+    <div class="panel-body">
+        <div class="row" style="margin-top: -30px;margin-bottom: 10px;">
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <select id="ddlStatus" class="form-control">
+                    <option value="-1">--Select Option--</option>
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option value="CLOSED">CLOSED</option>
+                    <option value="PROJECTED">PROJECTED</option>
+                    <option value="PDN COMPLETE">PDN COMPLETE</option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="RUNNING">RUNNING</option>
+                    <option value="TO CLOSE">TO CLOSE</option>
+                </select>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <input id="Kendofilter" type="text" class="form-control" placeholder="Search Here....." />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div id="divPRStatus">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .panel .panel-heading {
+        padding-top: 5px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+    }
+
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+</style>

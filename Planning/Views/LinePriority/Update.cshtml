@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/LinePriority.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h4 class="panel-title" style="width:25%;">Line Wise Priority</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 10px;">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="ddlLineNumber">Line Number</label>
+                <select id="ddlLineNumber" class="selectpicker" data-live-search="true" multiple="multiple"></select>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2" style="padding-top: 27px;padding-left: 20px;">
+                <button id="btnLoadLineInformation" class="btn btn-primary">Load Line Information</button>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div id="divLinePriority">
+
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+<style>
+    .panel .panel-heading {
+        padding-top: 5px;
+        padding-bottom: 0px;
+        position: relative;
+    }
+    .panel .panel-body {
+        padding-top: 0px;
+        padding-bottom: 15px;
+    }
+</style>

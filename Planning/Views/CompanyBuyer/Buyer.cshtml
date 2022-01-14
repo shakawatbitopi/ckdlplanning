@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Company Wise Buyer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/CompanyBuyer.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading" style="border-bottom: 1px solid #ddd;">
+        <h4 class="panel-title" style="font-family: 'Pacifico', cursive">Company Wise Buyer</h4>
+    </div>
+    <div class="panel-body">        
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div id="divCompanyBuyer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalCompanyBuyer" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Company Wise Buyer</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label for="ddlCompanyID">Company</label>
+                        <select id="ddlCompanyID" class="form-control"></select>
+                        <input type="hidden" id="hdPRBuyerCompanyID" />
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label for="ddlBuyerID">Buyer</label>
+                        <select id="ddlBuyerID" class="selectpicker" data-live-search="true"></select>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="padding-top: 25px;">
+                        <button id="btnSave" class="btn btn-primary">Save</button>
+                        <button id="btnClear" class="btn btn-info">Clear</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style type="text/css">
+    .panel .panel-heading {
+        padding-top: 5px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+    }
+
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+</style>

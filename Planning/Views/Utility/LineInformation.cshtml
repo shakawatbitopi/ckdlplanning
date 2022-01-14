@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Line Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/LineInformation.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h4 class="panel-title" style="width:25%;">Company Wise Line Information</h4>
+        <hr />
+    </div>
+    <div class="panel-body">
+        <div class="row" style="margin-top: -30px;">
+            <div id="divLineInformation">
+
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .panel .panel-heading {
+        padding-top: 5px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+    }
+
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+</style>

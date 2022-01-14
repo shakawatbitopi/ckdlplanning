@@ -1,0 +1,212 @@
+﻿
+@{
+    ViewBag.Title = "Plan Board";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/PlanBoard.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <div class="form-group">
+                    <label>Company</label>
+                    <select id="ddlCompanyID" class="form-control">
+                        <option value="ALL">ALL</option>
+                        <option value="04">BGL</option>
+                        <option value="11">CKDL</option>
+                        <option value="08">KTL</option>
+                        <option value="09">RHL</option>
+                        <option value="06">TAL / MGL</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <label>Show Plan Date UpTo</label>
+                    <input type="text" id="txtFromDate" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <div class="form-group" style="padding-top: 27px;">
+                    <button id="btnLoadData" class="btn btn-primary">Load</button>
+                    <button id="btnSelectedPR" class="btn btn-info">PR</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 10px;">
+            <div id="divName">
+                <table id="tblMain">
+                    <thead>
+
+                    </thead>
+                    <tbody class="noselect"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 10px;">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">PR Information</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Line Information</a></li>
+                    <li><a data-toggle="tab" href="#menu2">EO Information</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <table id="tblPRMaster" class="table table-bordered">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <div id="tblPRLine">
+
+                        </div>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <div id="tblPREO">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="PRModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">PR List</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="overflow-y:scroll">
+                    <div id="tblPRList"></div>
+
+                    <script type="text/x-kendo-template" id="template">
+                        <div class="tabstrip">
+                            <div style="background-color:rgb(244, 246, 249)">
+                                <div class="orders"></div>
+                            </div>
+                        </div>
+                    </script>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="PRUpdateModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">PR Update</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Plan Date</label>
+                            <input id="PRMasterID" type="hidden" class="form-control" />
+                            <input id="PlanDate" type="text" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Line No</label>
+                            <input id="LineNo" type="text" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Plan Qty</label>
+                            <input id="txtPlanQty" type="text" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Produced Qty</label>
+                            <input id="txtProducedQty" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="UpdatePRBtn" type="button" class="btn btn-success">Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+@*<link href="~/Content/PlanningBoard.css" rel="stylesheet" />*@
+<style type="text/css">
+    .wy-tooltip {
+        z-index:9;
+        border: 1px solid #F1D031;
+        color: #444;
+        background: #FFFFA3;
+        box-shadow: 0 2px 3px #999;
+        position: absolute;
+        font-size: 9pt;
+        font-weight:400;
+        padding: 5px;
+        text-align: left;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+       
+        -webkit-user-select: none; /* Safari 3.1+ */
+        -moz-user-select: none; /* Firefox 2+ */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none; /* Standard syntax */
+    }
+
+    .wy-hide {
+        display: none;
+    }
+
+    #divName {
+        z-index:1 ;
+        position: relative;
+
+        cursor:pointer;
+    }
+   .SpanHover:hover {
+      background: yellow !important;
+      cursor:pointer;
+    }
+    
+
+    tbody tr,td,span,a{
+        -webkit-user-select: none; /* Safari 3.1+ */
+        -moz-user-select: none; /* Firefox 2+ */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none; /* Standard syntax */
+        cursor:pointer !important;
+    }
+
+    .hero-image {
+        /*background-image: url('../../Content/Images/Cross.jpg');*/
+        background-color: #cccccc;
+        height: 15px;
+        background-repeat: repeat;
+        background-size: 9px 13px;
+    }
+    .spOff{
+        background-color:transparent !important;
+        background:transparent !important;
+    }
+    .spOff a{
+        color:transparent !important;
+    }
+</style>

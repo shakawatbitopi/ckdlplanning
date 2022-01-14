@@ -1,0 +1,303 @@
+﻿
+@{
+    ViewBag.Title = "Additinal PR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap" rel="stylesheet" />
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/AdditionalPR.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading" style="border-bottom: 1px solid #eee;padding-bottom: 10px;">
+        <h3 class="panel-title" style="font-family: 'Pacifico', cursive">Additional PR</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="ddlCompany">APRID</label>
+                <div class="input-group">
+                    <input type="text" class="form-control txt" id="txtAPRID" disabled style="padding: 0;text-align: center;" />
+                    <span class="input-group-addon">
+                        <button id="btnNew" class="btn btn-primary" style="padding-left: 10px;padding-right: 10px;">
+                            <strong>N</strong>
+                        </button>
+                        <button style="padding-left: 10px;padding-right: 10px;" id="btnFind" class="btn btn-primary">
+                            <i class="fa fa-filter"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="ddlCompany">Company</label>
+                <select id="ddlCompany" class="form-control"></select>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <label for="ddlBuyer">Buyer</label>
+                <select id="ddlBuyer" class="selectpicker" data-live-search="true"></select>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <label for="ddlFileRef">File Ref</label>
+                <select id="ddlFileRef" class="selectpicker" data-live-search="true"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtSAM">SAM</label>
+                <input type="text" id="txtSAM" class="form-control txt numericDecimal" />
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtCM">CM</label>
+                <input type="text" id="txtCM" class="form-control txt numericDecimal" />
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtFOB">FOB</label>
+                <input type="text" id="txtFOB" class="form-control txt numericDecimal" />
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtPCD">PCD</label>
+                <input type="text" id="txtPCD" class="form-control txt" />
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-4">
+                <label for="txtReason">Reason</label>
+                <textarea type="text" id="txtReason" rows="1" class="form-control txt" style="height: 35px;"></textarea>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtQty">Quantity</label>
+                <input type="text" id="txtQty" class="form-control txt numericDecimal" />
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="ddlStyleType">Style Type</label>
+                <select id="ddlStyleType" class="form-control">
+                    <option value="BOTTOMS">BOTTOMS</option>
+                    <option value="JACKETS">JACKETS</option>
+                    <option value="SHIRTS/DRESS">SHIRTS/DRESS</option>
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtTotalWorkingMinutes">Total Working Minutes</label>
+                <input type="text" id="txtTotalWorkingMinutes" class="form-control txt numericDecimal" />
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="ddlRepeatOrder">Repeat Order</label>
+                <select id="ddlRepeatOrder" class="form-control">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2">
+                <label for="txtPriorityNo">Priority No</label>
+                <input type="text" id="txtPriorityNo" class="form-control numericDecimal txt">
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4" style="padding-top: 20px;">
+                <button id="btnSaveAPR" class="btn btn-primary">Save</button>
+                <button id="btnClear" class="btn btn-info">Clear</button>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div id="divLineInformation">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalPRInformation" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">PR Information</h4>
+            </div>
+            <div class="modal-body" style="overflow:scroll;">
+                <div class="row" style="padding: 0px 15px 0px 15px; margin-top: -15px;">
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: #d9ecf5; padding: 1px 16px 1px 10px;">
+                        <input id='Kendofilter' style='float: right;' class='k-textbox' placeholder='Search..' />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div id="divAPRInformation">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="btnSideBarClick" class="btn btn-primary btn-sm hidden" data-toggle-sidebar="sidebar2" aria-label="Toggle the document main sidebar visibility" style="margin-top:25px;"><i class="fa fa-bars"></i></button>
+<div id="sidebar2" class="sidebarRight" aria-label="Main sidebar containing navigation links and some information" aria-hidden="true">
+    <div class="sidebar__content">
+        <div class="sidebarHeader">
+            <center><button data-toggle-sidebar="sidebar2" style="border: none;background: #313129;">Close Menu →</button></center>
+        </div>
+        <div id="sideBarContent">
+
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .panel .panel-heading {
+        padding-top: 5px;
+        padding-bottom: 0px;
+        position: relative;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+    }
+
+    .input-group-addon {
+        padding: 0px 0px;
+    }
+
+    .bs3-has-addon {
+        width: 100%;
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+
+    .k-footer-template {
+        text-align: center !important;
+    }
+
+    .form-control.k-widget {
+        padding: 0;
+        width: 100%;
+    }
+</style>
+<style type="text/css">
+    /* SIDEBAR POSITION */
+    .sidebarRight {
+        background-color: #f1f1f1;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        /*min-width: 400px;*/
+        width: 360px;
+        z-index: 999999;
+    }
+
+    .sidebar__content {
+        padding: 8px;
+    }
+    /* SIDEBAR HIDDEN STATE */
+    .sidebarRight[aria-hidden="true"] {
+        transition: 200ms;
+        transform: translateX(100%);
+    }
+    /* SIDEBAR VISIBLE STATE */
+    .sidebarRight:not([aria-hidden]),
+    .sidebarRight[aria-hidden="false"] {
+        transition: 200ms;
+        transform: translateX(0);
+    }
+
+    .sidebarHeader {
+        -moz-appearance: none;
+        background-color: #313129;
+        border: medium none;
+        box-shadow: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        height: 50px;
+        margin: -8px;
+        padding: 12px
+    }
+
+    #sideBarContent {
+        margin-top: 10px;
+        overflow-y: scroll;
+        height: 100vh;
+        padding-bottom: 100px;
+    }
+    /********************/
+    .divCellInfo {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 5px;
+        margin-bottom: 2px;
+        color: #000;
+        font-size: 8pt;
+        font-family: verdana;
+        overflow: hidden;
+    }
+
+    .divPlanDateRow {
+        border-bottom: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    .btnDateDivClose {
+        float: right;
+        color: red;
+        font-size: 11pt;
+        margin-top: -10px;
+    }
+
+    .divPRDateList {
+        max-height: 400px;
+        overflow-y: scroll;
+        padding: 25px;
+    }
+
+    .divDateHide {
+        display: none;
+    }
+
+    #sideBarContent ion-icon {
+        font-size: 17px;
+        color: purple;
+    }
+
+    .spanLineTitle {
+        background-color: yellow;
+        border: 1px solid #ddd;
+        font-weight: 600;
+        padding: 5px 5px 5px 5px;
+    }
+</style>
+<script type="text/javascript">
+    document.querySelectorAll('[data-toggle-sidebar]').forEach(toggle => {
+        toggle.addEventListener('click', e => {
+            const sidebarID = toggle.dataset.toggleSidebar;
+            const sidebarElement = sidebarID ? document.getElementById(sidebarID) : undefined;
+            if (sidebarElement) {
+                let sidebarState = sidebarElement.getAttribute('aria-hidden');
+                sidebarElement.setAttribute('aria-hidden', sidebarState == 'true' ? false : true);
+            }
+        });
+    });
+    let myLabels = document.querySelectorAll('.lbl-toggle');
+
+    Array.from(myLabels).forEach(label => {
+        label.addEventListener('keydown', e => {
+            if (e.which === 32 || e.which === 13) {
+                e.preventDefault();
+                label.click();
+            };
+        });
+    });
+</script>

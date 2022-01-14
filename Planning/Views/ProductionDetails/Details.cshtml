@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "PR Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/CustomContents/js/ProductionDetails.js")?@Common.AppSettings.Version"></script>
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h4 class="panel-title" style="width:25%;color: darkblue;">Production Reference Information</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12" style="border: 1px solid #ddd;padding-top: 10px;padding-bottom: 10px;">
+                <div class="row">
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtTotalWorkingMinutes">PRID</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="txtPRID" readonly />
+                            <span class="input-group-addon">
+                                <button id="btnNew" class="btn btn-primary" style="padding-left: 10px;padding-right: 10px;">
+                                    <strong>N</strong>
+                                </button>
+                                <button id="btnFind" class="btn btn-primary" style="padding-left: 10px;padding-right: 10px;">
+                                    <i class="fa fa-filter"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtFileRefNo">FileRef No</label>
+                        <input type="text" id="txtFileRefNo" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtTotalWorkingMinutes">Total Working Minutes</label>
+                        <input type="text" id="txtTotalWorkingMinutes" class="form-control" />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtOrderQty">Order Qty(PCS)</label>
+                        <input type="text" id="txtOrderQty" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtExtraPercentage">Extra (%)</label>
+                        <input type="text" id="txtExtraPercentage" class="form-control numericDecimal" />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtPlanProduction">Plan Production (PCS)</label>
+                        <input type="text" id="txtPlanProduction" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="ddlFileRef">Increment Type</label><br />
+                        <label class="radio-inline"><input type="radio" name="rbIncrementType" value="Fixed" checked>Fixed</label>
+                        <label class="radio-inline hidden"><input type="radio" name="rbIncrementType" value="Percentage">Percentage</label>
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtBulletinID">Bulletin ID</label>
+                        <input type="text" id="txtBulletinID" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtNoOfWorkStation">No of Work Station</label>
+                        <input type="text" id="txtNoOfWorkStation" class="form-control" />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtSAM">SAM</label>
+                        <input type="text" id="txtSAM" class="form-control numericDecimal" />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtFirstDayOutput">1st Day Output</label>
+                        <input type="text" id="txtFirstDayOutput" class="form-control" />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtIncrementQty">Increment Qty</label>
+                        <input type="text" id="txtIncrementQty" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-12 col-md-2 col-lg-2 hidden">
+                        <label for="txtLineDaysRequire">Line Days Require</label>
+                        <input type="text" id="txtLineDaysRequire" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2 hidden">
+                        <label for="txtMinLineDays">Min Line Days</label>
+                        <input type="text" id="txtMinLineDays" class="form-control" />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtPCD">PCD Date</label>
+                        <input type="text" id="txtPCD" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtPlanStartDate">Plan Start Date</label>
+                        <input type="text" id="txtPlanStartDate" class="form-control" />
+                    </div>
+
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtHourlyProduction">Hourly Production at 100% Eff.</label>
+                        <input type="text" id="txtHourlyProduction" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtOrgEff">Org Eff.</label>
+                        <input type="text" id="txtOrgEff" class="form-control numericDecimal" />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtHourlyProdOrgEff">Hourly Prod. at Org Eff.</label>
+                        <input type="text" id="txtHourlyProdOrgEff" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtDailyTargetProductionPerLine">Daily Tgt Production/line</label>
+                        <input type="text" id="txtDailyTargetProductionPerLine" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2">
+                        <label for="txtLineAllocated">Line Allocated</label>
+                        <input type="text" id="txtLineAllocated" class="form-control" />
+                    </div>
+                    <div class="col-sm-12 col-md-1 col-lg-1 hidden" style="padding-top: 22px;">
+                        <button id="btnPreview" class="btn btn-primary" disabled>Preview Data</button>
+                    </div>
+                    <div class="col-sm-12 col-md-1 col-lg-1" style="padding-top: 22px;">
+                        <button id="btnSavePRInformation" class="btn btn-primary">Update PR Information</button>
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2 hidden">
+                        <label for="txtFinishDays">Finish Days</label>
+                        <input type="text" id="txtFinishDays" class="form-control" />
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2 hidden">
+                        <label for="txtOrderPriority">Order Priority</label>
+                        <input type="text" id="txtOrderPriority" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-2 col-lg-2 hidden">
+                        <label for="txtExFactoryDate">Ex Factory Date</label>
+                        <input type="text" id="txtExFactoryDate" class="form-control" disabled />
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">               
+                <div id="divLineInformation">
+
+                </div>
+                <script type="text/x-kendo-template" id="template">
+                    <div class="tabstrip">
+                        <div style="background-color:rgb(244, 246, 249)">
+                            <div class="orders"></div>
+                        </div>
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalPRInformation" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">PR Information</h4>
+            </div>
+            <div class="modal-body" style="overflow:scroll;">
+                <div class="row" style="margin-top: -15px;">
+                    <div style="padding: 0px 15px 0px 15px;">
+                        <div class="col-sm-12 col-md-6 col-lg-6" style="background-color: #d9ecf5; padding: 2px 16px 12px 10px;">
+                            <label class="radio-inline"><input type="radio" value="0" name="prRadio" checked>Regular PR</label>
+                            <label class="radio-inline"><input type="radio" value="1" name="prRadio">Additional PR</label>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6" style="background-color: #d9ecf5; padding: 1px 16px 1px 10px;">
+                            <input id='Kendofilter' style='float: right;' class='k-textbox' placeholder='Search..' />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div id="divPRInformation">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .form-control.k-widget {
+        padding: 0;
+        width: 100%;
+    }
+
+    label {
+        font-size: 1.25rem;
+        margin-bottom: 0px;
+    }
+
+    .input-group-addon {
+        padding: 0px 0px;
+    }
+
+    .k-grid-header th.k-header {
+        vertical-align: middle;
+        font-size: 9pt;
+        text-align: center;
+    }
+
+        .k-grid-header th.k-header > .k-link {
+            text-align: center;
+            font-weight: 600;
+        }
+
+    .k-grid td {
+        font-size: 9pt;
+    }
+
+    .panel .panel-heading {
+        padding-top: 15px;
+        padding-bottom: 0px;
+        position: relative;
+    }
+
+    .panel.panel-headline .panel-heading .panel-title {
+        margin-bottom: 0px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .yellowHeader {
+        background-color: yellow;
+    }
+
+    .k-grid .k-grid-search {
+        margin-left: auto;
+        margin-right: 0;
+    }
+</style>
